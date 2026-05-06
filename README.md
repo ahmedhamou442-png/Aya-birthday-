@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Happy Birthday Aya 💖</title>
+
+<style>
+body {
+    margin: 0;
+    padding: 0;
+    background: radial-gradient(circle, #ff9a9e, #c084fc, #1a1a2e);
+    font-family: 'Segoe UI', sans-serif;
+    text-align: center;
+    overflow: hidden;
+    color: white;
+}
+
+/* Title */
+h1 {
+    margin-top: 40px;
+    font-size: 3em;
+}
+
+/* Typewriter text */
+#text {
+    width: 80%;
+    margin: auto;
+    font-size: 20px;
+    min-height: 120px;
+    margin-top: 20px;
+}
+
+/* Button */
+button {
+    margin-top: 20px;
+    padding: 15px 30px;
+    border: none;
+    border-radius: 30px;
+    background: #ff4b8b;
+    color: white;
+    font-size: 18px;
+    cursor: pointer;
+}
+
+/* Cake */
+.cake {
+    margin: 30px auto;
+    width: 160px;
+    position: relative;
+}
+
+.layer {
+    width: 160px;
+    height: 50px;
+    background: #ffb6c1;
+    border-radius: 12px;
+    margin: 5px 0;
+}
+
+.candle {
+    width: 10px;
+    height: 30px;
+    background: white;
+    position: absolute;
+    top: -30px;
+    left: 75px;
+}
+
+.flame {
+    width: 10px;
+    height: 10px;
+    background: orange;
+    border-radius: 50%;
+    animation: flicker 0.2s infinite;
+}
+
+/* Stars */
+.star {
+    position: absolute;
+    width: 3px;
+    height: 3px;
+    background: white;
+    animation: twinkle 2s infinite;
+}
+
+/* Fireworks */
+.firework {
+    position: absolute;
+    width: 5px;
+    height: 5px;
+    background: pink;
+    border-radius: 50%;
+    animation: explode 1s ease-out forwards;
+}
+
+@keyframes flicker {
+    50% {transform: scale(1.3);}
+}
+
+@keyframes twinkle {
+    0%,100% {opacity: 0.2;}
+    50% {opacity: 1;}
+}
+
+@keyframes explode {
+    to {
+        transform: translate(var(--x), var(--y));
+        opacity: 0;
+    }
+}
+</style>
+
+</head>
+
+<body>
+
+<h1>🎉 عيد ميلاد سعيد Aya 💖</h1>
+
+<div id="text"></div>
+
+<div class="cake">
+    <div class="candle"><div class="flame"></div></div>
+    <div class="layer"></div>
+    <div class="layer"></div>
+    <div class="layer"></div>
+</div>
+
+<button onclick="surprise()">ديري كليك هنا 🎁</button>
+
+<audio autoplay loop>
+  <source src="https://www.bensound.com/bensound-music/bensound-romantic.mp3" type="audio/mp3">
+</audio>
+
+<script>
+/* TYPEWRITER MESSAGE */
+const message = "Aya ❤️\nمن نهار دخلتي لحياتي وكلشي تبدل...\nوليت كنفرح على أبسط الحوايج غير حيث نتي فيهم 🥺💕\n\nكنتمنا ليك عيد ميلاد زوين بزاف، عام جديد مليان حب وفرح ونجاح ✨\n\nوبغيتك تعرفي بلي نتي ماشي غير إنسانة عادية...\nنتي أجمل حاجة وقعات ليا فحياتي 💖\n\nكنبغيك بزاف ❤️";
+
+let i = 0;
+function typeWriter() {
+    if (i < message.length) {
+        document.getElementById("text").innerHTML += message.charAt(i);
+        i++;
+        setTimeout(typeWriter, 40);
+    }
+}
+typeWriter();
+
+/* Surprise */
+function surprise() {
+    for(let i=0;i<50;i++){
+        let f = document.createElement("div");
+        f.classList.add("firework");
+
+        f.style.left = "50%";
+        f.style.top = "50%";
+
+        let x = (Math.random()-0.5)*400 + "px";
+        let y = (Math.random()-0.5)*400 + "px";
+
+        f.style.setProperty('--x', x);
+        f.style.setProperty('--y', y);
+
+        document.body.appendChild(f);
+
+        setTimeout(()=>f.remove(),1000);
+    }
+}
+
+/* Stars background */
+for(let i=0;i<100;i++){
+    let star = document.createElement("div");
+    star.classList.add("star");
+    star.style.left = Math.random()*100+"vw";
+    star.style.top = Math.random()*100+"vh";
+    star.style.animationDuration = (Math.random()*2+1)+"s";
+    document.body.appendChild(star);
+}
+</script>
+
+</body>
+</html>
