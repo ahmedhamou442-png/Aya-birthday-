@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Happy Birthday Aya 💖</title>
+
+<style>
+body {
+    margin: 0;
+    background: radial-gradient(circle, #ff9a9e, #c084fc, #1a1a2e);
+    font-family: sans-serif;
+    color: white;
+    text-align: center;
+    overflow: hidden;
+}
+
+h1 {
+    margin-top: 20px;
+}
+
+/* Typewriter */
+#text {
+    width: 80%;
+    margin: auto;
+    font-size: 18px;
+    min-height: 120px;
+}
+
+/* Game area */
+#game {
+    position: relative;
+    width: 100%;
+    height: 300px;
+    border-top: 2px solid white;
+    margin-top: 20px;
+    overflow: hidden;
+}
+
+.heart {
+    position: absolute;
+    font-size: 25px;
+    cursor: pointer;
+    animation: fall linear;
+}
+
+/* Score */
+#score {
+    margin-top: 10px;
+    font-size: 20px;
+}
+
+/* Button */
+button {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 20px;
+    background: #ff4b8b;
+    color: white;
+    cursor: pointer;
+}
+
+@keyframes fall {
+    from { top: -10%; }
+    to { top: 110%; }
+}
+</style>
+</head>
+
+<body>
+
+<h1>🎉 عيد ميلاد سعيد Aya 💖</h1>
+
+<div id="text"></div>
+
+<div id="score">Score: 0 ❤️</div>
+<button onclick="startGame()">بداي اللعبة 🎮</button>
+
+<div id="game"></div>
+
+<audio autoplay loop>
+  <source src="https://www.bensound.com/bensound-music/bensound-romantic.mp3" type="audio/mp3">
+</audio>
+
+<script>
+/* TYPEWRITER */
+const message = "Aya ❤️\nكنبغيك بزاف وكنتمنا ليك حياة كلها سعادة 💕\nاليوم هو نهارك وكنتمنا يكون أحسن نهار فحياتك ✨";
+let i=0;
+function typeWriter(){
+    if(i<message.length){
+        document.getElementById("text").innerHTML+=message.charAt(i);
+        i++;
+        setTimeout(typeWriter,40);
+    }
+}
+typeWriter();
+
+/* GAME */
+let score = 0;
+let gameInterval;
+
+function startGame(){
+    score = 0;
+    document.getElementById("score").innerHTML = "Score: 0 ❤️";
+    clearInterval(gameInterval);
+
+    gameInterval = setInterval(createHeart, 800);
+}
+
+function createHeart(){
+    let heart = document.createElement("div");
+    heart.classList.add("heart");
+    heart.innerHTML = "💖";
+
+    heart.style.left = Math.random()*90 + "vw";
+    heart.style.animationDuration = (Math.random()*2+3)+"s";
+
+    heart.onclick = function(){
+        score++;
+        document.getElementById("score").innerHTML = "Score: "+score+" ❤️";
+        heart.remove();
+
+        if(score >= 10){
+            winGame();
+        }
+    }
+
+    document.getElementById("game").appendChild(heart);
+
+    setTimeout(()=>heart.remove(),5000);
+}
+
+function winGame(){
+    clearInterval(gameInterval);
+    alert("Aya ❤️ ربحتي اللعبة!\nكنبغيك بزاف وبغيت نعيش معاك أجمل لحظات 💖🥺");
+}
+</script>
+
+</body>
+</html>
